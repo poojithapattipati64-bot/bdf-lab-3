@@ -22,6 +22,8 @@ books-api-lab3/
 │   └── fixed_server.js       # Reference solution (don't peek!)
 ├── postman/
 │   └── Books_API_Lab3.postman_collection.json
+├── screenshots/
+│   └── API_Test_Results.md   # All 16 live request/response results
 ├── database.js               # SQLite connection + schema
 ├── seed.js                   # Sample data loader (node seed.js)
 ├── server.js                 # Express app entry-point
@@ -143,6 +145,31 @@ Fix each bug, then compare with `fixed_server.js`.
 
 Import `postman/Books_API_Lab3.postman_collection.json` into Postman.  
 The collection covers **16 requests** across all endpoints — both success and failure cases.
+
+See [`screenshots/API_Test_Results.md`](./screenshots/API_Test_Results.md) for all 16 live request/response results.
+
+---
+
+## Test Results Summary (All 16 Passed ✅)
+
+| # | Endpoint | Status | Result |
+|---|----------|--------|--------|
+| 1 | GET /books | 200 | ✅ 11 books returned |
+| 2 | GET /books?search_q=harry | 200 | ✅ 1 book found |
+| 3 | GET /books?min_price=10&max_price=25 | 200 | ✅ 7 books in range |
+| 4 | GET /books?order_by=price&order=DESC&limit=3 | 200 | ✅ Top 3 by price |
+| 5 | GET /books?limit=3&offset=0 | 200 | ✅ First page |
+| 6 | GET /books?order_by=password | 400 | ✅ Rejected invalid column |
+| 7 | GET /books/1 | 200 | ✅ Single book |
+| 8 | GET /books/9999 | 404 | ✅ Not found |
+| 9 | POST /books (valid) | 201 | ✅ Created id=12 |
+| 10 | POST /books (missing title) | 400 | ✅ Validation error |
+| 11 | POST /books (price='free') | 400 | ✅ Validation error |
+| 12 | POST /books ({}) | 400 | ✅ All 3 errors returned |
+| 13 | PUT /books/1 (valid) | 200 | ✅ Updated |
+| 14 | PUT /books/9999 | 404 | ✅ Not found |
+| 15 | DELETE /books/11 | 200 | ✅ Deleted |
+| 16 | DELETE /books/9999 | 404 | ✅ Not found |
 
 ---
 
